@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import store from './../../redux/store';
-var request = require('superagent');
+import request from 'superagent';
 
 class Signup extends React.Component {
     constructor(props) {
