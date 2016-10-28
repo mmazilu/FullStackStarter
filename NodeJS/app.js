@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -11,10 +12,13 @@ var app = express();
 
 dotenv.load();
 app.use(cors());
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: true
+}));
 
 var routes = require('./routes/routes');
-console.log(process.env.DB_CONNECTION);
-
 
 // view engine setup
 // uncomment after placing your favicon in /public

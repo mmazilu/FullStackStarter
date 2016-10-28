@@ -8,42 +8,60 @@ bluebird.promisifyAll(MongoClient);
 const connection ="mongodb://" + process.env.DB_CONNECTION + "/user";
 
 userController = {
-    getUsers: (req, res) => {
+    getUsers: (err, callback) => {
         var theDb;
-        console.log(connection);
         MongoClient.connectAsync(connection)
-            .then( function(db) {
+            .then(function(db) {
                 theDb = db;
                 return theDb.collection("test").findAsync({});
             })
             .then(function (cursor) {
                 cursor.toArray((err, items) => {
-                    res.send(items);
+                    callback(items);
                 });
             })
             .finally(() => {theDb.close()})
             .catch((err)=>{
                 console.log(err);
-                res.sendStatus(500);
+                err(500);
             });
     },
 
-    saveUser: (req, res) => {
+    getUser: (user, err, callback) => {
+        var theDb;
+        MongoClient.connectAsync(connection)
+            .then(function(db) {
+                theDb = db;
+                return theDb.collection("test").findAsync({"user":user});
+            })
+            .then(function (cursor) {
+                cursor.toArray((err, items) => {
+                    callback(items);
+                });
+            })
+            .finally(() => {theDb.close()})
+            .catch((err)=>{
+                console.log(err);
+                err(500);
+            });
+    },
+
+    saveUser: (user, err, callback) => {
         var theDb;
         MongoClient.connectAsync(connection)
             .then( function(db) {
                 theDb = db;
-                return theDb.collection("test").insertAsync({user:"666"});
+                return theDb.collection("test").insertAsync(user);
             })
             .then(() => {
-                res.sendStatus(200);
+                callback();
             })
             .finally(() => {
                 theDb.close()
             })
-            .catch((err)=>{
-                console.log(err);
-                res.sendStatus(500);
+            .catch((e)=>{
+                console.log(e);
+                err(e);
             });
     }
 
