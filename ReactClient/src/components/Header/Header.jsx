@@ -1,13 +1,14 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 
 function Header({name}) {
     let title = name ? "Welcome " + name : "Welcome guest";
 
     return (
         <AppBar
-            title="Title"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            title={title}
+            iconElementRight={<FlatButton label="Sign Up/Login" href="/login" />}
         />
     )
 }

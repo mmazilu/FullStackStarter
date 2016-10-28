@@ -78,7 +78,7 @@ const Hello = () => (
             </div>
         </MuiThemeProvider>
     </Router>
-)
+);
 
 
 ReactDOM.render(
