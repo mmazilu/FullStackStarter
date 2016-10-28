@@ -8,6 +8,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Header from './components/Header/Header.jsx';
+import Login from './pages/Login/Login.jsx';
+import Signup from './pages/Login/Signup.jsx';
 import store from './redux/store';
 import {toggleValue} from './redux/actions';
 
@@ -23,6 +25,8 @@ class Home extends React.Component {
         this.unsubscribe = store.subscribe(() => {
             this.setState(store.getState());
         });
+        console.log("================");
+        console.log(Router);
     }
 
     componentWillUnmount() {
@@ -74,6 +78,8 @@ const Hello = () => (
                 <Match exactly pattern="/" component={Home} />
                 <Match pattern="/about" component={About} />
                 <Match pattern="/topics" component={Topics} />
+                <Match pattern="/login" component={Login} />
+                <Match pattern="/signup" component={Signup} />
                 <Miss component={NoMatch}/>
             </div>
         </MuiThemeProvider>
