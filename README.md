@@ -6,10 +6,10 @@ MongoDB : external requirement
 
 * NodeJS
    A very basic nodeJS server which connects to a mongoDB
-   Setup steps:
-    * cd NodeJS
-    * npm install
-    * node bin/www
+   - Setup steps:
+      * cd NodeJS
+      * npm install
+      * node bin/www
     
 
 
