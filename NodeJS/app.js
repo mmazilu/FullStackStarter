@@ -4,10 +4,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/routes');
+var dotenv = require('dotenv');
+var cors = require('cors');
 
 var app = express();
+
+dotenv.load();
+app.use(cors());
+
+var routes = require('./routes/routes');
+console.log(process.env.DB_CONNECTION);
+
 
 // view engine setup
 // uncomment after placing your favicon in /public
