@@ -34,6 +34,7 @@ MongoDB : external requirement
       * Android Studio 2.0
       * SDK Tools 25.0.10 or higher
       * Android emulator
+      * follow instalation steps provided at: https://facebook.github.io/react-native/docs/getting-started.html (remember to choose your OS and your platform - we will focus on Android as platform)
    - Setup steps
       * cd ReactNative
       * npm install -g react-native-cli (use sudo in case of MacOS)
