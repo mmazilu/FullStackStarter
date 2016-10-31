@@ -14,11 +14,25 @@ router.get('/login', function (req, res) {
     if (!req.query.username || !req.query.password) {
         res.sendStatus(400);
     } else {
-        UserController.getUser(req.query.username,
-            function(err) {
-                res.sendStatus(err);
-            },
-            function(users) {
+        //UserController.getUser(req.query.username,
+        //    function(err) {
+        //        res.sendStatus(err);
+        //    },
+        //    function(users) {
+        //        if (users.length > 0) {
+        //            if(users[0].user === req.query.username && req.query.password === users[0].password) {
+        //                req.session.loggedIn = true;
+        //                res.sendStatus(200);
+        //            }
+        //        } else {
+        //            res.send(401);
+        //        }
+        //    }
+        //);
+        console.log('getting user');
+        UserController.getUser(req.query.username)
+            .then((users) => {
+                console.log('came back');
                 if (users.length > 0) {
                     if(users[0].user === req.query.username && req.query.password === users[0].password) {
                         req.session.loggedIn = true;
@@ -27,8 +41,11 @@ router.get('/login', function (req, res) {
                 } else {
                     res.send(401);
                 }
-            }
-        );
+            })
+            .catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            });
     }
 });
 
@@ -44,7 +61,7 @@ router.get('/signup', function (req, res) {
                 if (users.length > 0) {
                     res.sendStatus(403);
                 } else {
-                    let newUser = {
+                    var newUser = {
                         user: req.query.username,
                         password: req.query.password,
                         name: req.query.name

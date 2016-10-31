@@ -37,7 +37,19 @@ class Login extends React.Component {
     }
 
     _onClickHandler() {
-        store.dispatch(toggleValue(!this.state.value));
+        request.get("http://localhost:4000/api/login?username=" +
+                this.refs.username.getValue() +
+                "&password="+ this.refs.password.getValue() +
+                "&name=" + this.refs.name.getValue())
+            .end(function (err, res) {
+                if (err) {
+                    alert("Forbidden");
+                } else {
+                    alert("bine bre");
+                }
+            });
+        //
+        //store.dispatch(toggleValue(!this.state.value));
     }
 }
 
