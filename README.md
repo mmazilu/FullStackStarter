@@ -17,9 +17,9 @@ MongoDB : external requirement
          * POST /api/users : creates a new user in the mongo collection
 
 * <b>ReactClient</b>
-   A very basic react client build with
-      - material UI library for UI elements
-      - redux for managing the React flow
+   - A very basic react client build with
+      * material UI library for UI elements
+      * redux for managing the React flow
    - Setup steps
       * cd NodeJS
       * npm install
