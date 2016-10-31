@@ -28,3 +28,16 @@ MongoDB : external requirement
    - Develop
       * npm start (this will start a webpack bundler which repackages the app while it's being developed - app is served from port 3000)
       
+* <b>ReactNative</b>
+   A very basic react native client
+   - Required dependencies:
+      * Android Studio 2.0
+      * SDK Tools 25.0.10 or higher
+      * Android emulator
+   - Setup steps
+      * cd ReactNative
+      * npm install -g react-native-cli (use sudo in case of MacOS)
+   - Build (this will create the packaged app in the dist folder within the app):
+      * npm run build
+   - Develop
+      * npm start (this will start a webpack bundler which repackages the app while it's being developed - app is served from port 3000)
