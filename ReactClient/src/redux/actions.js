@@ -1,12 +1,12 @@
 
 // Action types
-export const TOGGLE_VALUE = 'TOGGLE_VALUE';
+export const LOGGED_IN = 'LOGGED_IN';
 
 // Action creators
 
-export function toggleValue(value) {
+export function logIn(value) {
     return {
-        type: TOGGLE_VALUE,
+        type: LOGGED_IN,
         value
     };
 }

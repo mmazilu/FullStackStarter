@@ -2,7 +2,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import store from './../../redux/store';
-import request from 'superagent';
+import axios from 'axios';
+import {logIn} from './../../redux/actions';
 
 class Signup extends React.Component {
     constructor(props) {
@@ -45,18 +46,31 @@ class Signup extends React.Component {
     }
 
     _onClickHandler() {
-        request.get("http://localhost:4000/api/signup?username=" +
-            this.refs.username.getValue() +
-            "&password="+ this.refs.password.getValue() +
-            "&name=" + this.refs.name.getValue())
-            .end(function (err, res) {
-                if (err) {
-                    alert("Forbidden");
-                } else {
-                    alert("bine bre");
+        axios.get("/api/signup", {
+                params: {
+                    username: this.refs.username.getValue(),
+                    password: this.refs.password.getValue(),
+                    name: this.refs.name.getValue()
                 }
+            })
+            .then((response) => {
+                return axios.get("/api/login", {
+                    params: {
+                        username: this.refs.username.getValue(),
+                        password: this.refs.password.getValue()
+                    }
+                });
+            })
+            .then(function (response) {
+                return axios.get("/api/profile");
+            })
+            .then(function (response) {
+                store.dispatch(logIn(response.data.name));
+            })
+            .catch(function (error) {
+                alert('fail');
+                console.log(error);
             });
-        //store.dispatch(toggleValue(!this.state.value));
     }
 }
 

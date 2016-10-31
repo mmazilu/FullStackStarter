@@ -1,17 +1,20 @@
-import { TOGGLE_VALUE } from './actions';
-
-const initialState = {
-    value: true
-};
+import { LOGGED_IN } from './actions';
+import {combineReducers} from 'redux'
 
 // Reducers
-export default function application(state = initialState, action) {
+function user(state = null, action) {
     switch (action.type) {
-        case TOGGLE_VALUE:
-            return Object.assign({}, state, {
-                value: action.value
+        case LOGGED_IN:
+            return Object.assign({}, state, {isLoggedIn:true}, {
+                name: action.value
             });
         default:
             return state;
     }
 }
+
+const reducers = combineReducers({
+    user
+});
+
+export default reducers
