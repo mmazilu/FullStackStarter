@@ -90,8 +90,4 @@ router.get('/users', auth, function(req, res) {
         });
 });
 
-router.post('/users', auth, function(req, res) {
-    UserController.saveUser(req,res);
-});
-
 module.exports = router;
