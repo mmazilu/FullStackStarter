@@ -14,7 +14,9 @@ MongoDB : external requirement
       * access on port 4000
       * provides two api endpoints:
          * GET /api/users : provides back an array of users from the mongo collection
-         * POST /api/users : creates a new user in the mongo collection
+         * GET /api/profile : provides the profile information for the currently authenticated user
+         * POST /api/signup : creates a new user in the mongo collection
+         * POST /api/login : authenticates a user
 
 * <b>ReactClient</b>
    - A very basic react client build with
@@ -39,7 +41,6 @@ MongoDB : external requirement
    - Setup steps
       * cd ReactNative
       * npm install -g react-native-cli (use sudo in case of MacOS)
-   - Build (this will create the packaged app in the dist folder within the app):
-      * npm run build
-   - Develop
-      * npm start (this will start a webpack bundler which repackages the app while it's being developed - app is served from port 3000)
+   - Running
+      * react-native run-ios
+      * react-native run-android
