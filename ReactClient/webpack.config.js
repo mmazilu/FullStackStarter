@@ -18,17 +18,23 @@ module.exports = {
         new CopyWebpackPlugin([
             {
                 from: 'index.html'
+            },
+            {
+                from: 'dist/*',
+                to: './../../NodeJS/public/',
+                flatten: true,
+                force: true
             }
-        ]),
+        ])//,
 
-        new webpack.optimize.OccurenceOrderPlugin(),
-
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            compressor: {
-                warnings: false
-            }
-        })
+        //new webpack.optimize.OccurenceOrderPlugin(),
+        //
+        //new webpack.optimize.UglifyJsPlugin({
+        //    minimize: true,
+        //    compressor: {
+        //        warnings: false
+        //    }
+        //})
     ],
 
     module: {

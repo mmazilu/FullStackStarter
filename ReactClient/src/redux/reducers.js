@@ -1,4 +1,8 @@
-import { LOGGED_IN } from './actions';
+import {
+    LOGGED_IN,
+    TOGGLE_MENU,
+    GOT_USERS
+} from './actions';
 import {combineReducers} from 'redux'
 
 // Reducers
@@ -13,8 +17,32 @@ function user(state = null, action) {
     }
 }
 
+function main(state = null, action) {
+    switch (action.type) {
+        case TOGGLE_MENU:
+            return Object.assign({}, state, {
+                menuOpen: action.value
+            });
+        default:
+            return state;
+    }
+}
+
+function users(state = null, action) {
+    switch (action.type) {
+        case GOT_USERS:
+            return Object.assign({}, state, {
+                userList: action.value
+            });
+        default:
+            return state;
+    }
+}
+
 const reducers = combineReducers({
-    user
+    user,
+    main,
+    users
 });
 
 export default reducers

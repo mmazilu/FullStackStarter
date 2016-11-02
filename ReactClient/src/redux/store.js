@@ -8,6 +8,12 @@ const loggerMiddleware = createLogger();
 var initialState = {
     user: {
         isLoggedIn: false
+    },
+    main: {
+        menuOpen: false
+    },
+    users:{
+        userList:null
     }
 };
 
