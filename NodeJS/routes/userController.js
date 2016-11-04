@@ -5,7 +5,7 @@ var MongoCollection  = require('mongodb').Collection;
 bluebird.promisifyAll(MongoCollection.prototype);
 bluebird.promisifyAll(MongoClient);
 
-const connection ="mongodb://" + process.env.DB_CONNECTION + "/user";
+const connection ="mongodb://" + process.env.DB_CONNECTION + "/test";
 
 userController = {
     getUsers: (err, callback) => {
@@ -13,7 +13,7 @@ userController = {
         MongoClient.connectAsync(connection)
             .then(function(db) {
                 theDb = db;
-                return theDb.collection("test").findAsync({});
+                return theDb.collection("user").findAsync({});
             })
             .then(function (cursor) {
                 cursor.toArray((err, items) => {
@@ -33,7 +33,7 @@ userController = {
             return MongoClient.connectAsync(connection)
                 .then(function(db) {
                     theDb = db;
-                    return theDb.collection("test").findAsync({"user":user});
+                    return theDb.collection("user").findAsync({"username":user});
                 })
                 .then(function (cursor) {
                     cursor.toArray((err, items) => {
@@ -53,7 +53,7 @@ userController = {
             return MongoClient.connectAsync(connection)
                 .then( function(db) {
                     theDb = db;
-                    return theDb.collection("test").insertAsync(user);
+                    return theDb.collection("user").insertAsync(user);
                 })
                 .then(resolve)
                 .finally(() => {

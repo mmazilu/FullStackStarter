@@ -18,7 +18,7 @@ class Users extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/api/users")
+        axios.get("/api/private/users")
             .then(function (response) {
                 store.dispatch(gotUsers(response.data));
             })

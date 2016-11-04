@@ -48,7 +48,7 @@ class Login extends React.Component {
                 }
             })
             .then(function (response) {
-                return axios.get("/api/profile");
+                return axios.get("/api/private/profile");
             })
             .then(function (response) {
                 store.dispatch(logIn(response.data.name));

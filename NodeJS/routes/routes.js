@@ -16,8 +16,9 @@ router.get('/login', function (req, res) {
     } else {
         UserController.getUser(req.query.username)
             .then((users) => {
+                console.log(users);
                 if (users.length > 0) {
-                    if(users[0].user === req.query.username && req.query.password === users[0].password) {
+                    if(users[0].username === req.query.username && req.query.password === users[0].password) {
                         req.session.loggedIn = true;
                         req.session.username = req.query.username;
                         res.sendStatus(200);
@@ -33,7 +34,7 @@ router.get('/login', function (req, res) {
     }
 });
 
-router.get('/profile', auth, function (req, res) {
+router.get('/private/profile', auth, function (req, res) {
     UserController.getUser(req.session.username)
         .then((users) => {
             if (users.length > 0) {
@@ -50,19 +51,19 @@ router.get('/profile', auth, function (req, res) {
 });
 
 
-router.get('/signup', function (req, res) {
-    if (!req.query.username || !req.query.password || !req.query.name) {
+router.post('/signup', function (req, res) {
+    if (!req.body.username || !req.body.password || !req.body.name) {
         res.sendStatus(400);
     } else {
-        UserController.getUser(req.query.username)
+        UserController.getUser(req.body.username)
             .then(function(users){
                 if (users.length > 0) {
                     res.sendStatus(403);
                 } else {
                     var newUser = {
-                        user: req.query.username,
-                        password: req.query.password,
-                        name: req.query.name
+                        user: req.body.username,
+                        password: req.body.password,
+                        name: req.body.name
                     };
                     UserController.saveUser(newUser)
                         .then(function() {
@@ -80,7 +81,7 @@ router.get('/signup', function (req, res) {
     }
 });
 
-router.get('/users', auth, function(req, res) {
+router.get('/private/users', auth, function(req, res) {
     UserController.getUsers(
         (code)=>{
             res.sendStatus(status);

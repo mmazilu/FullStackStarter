@@ -46,12 +46,10 @@ class Signup extends React.Component {
     }
 
     _onClickHandler() {
-        axios.get("/api/signup", {
-                params: {
-                    username: this.refs.username.getValue(),
-                    password: this.refs.password.getValue(),
-                    name: this.refs.name.getValue()
-                }
+        axios.post("/api/signup", {
+                username: this.refs.username.getValue(),
+                password: this.refs.password.getValue(),
+                name: this.refs.name.getValue()
             })
             .then((response) => {
                 return axios.get("/api/login", {
@@ -62,7 +60,7 @@ class Signup extends React.Component {
                 });
             })
             .then(function (response) {
-                return axios.get("/api/profile");
+                return axios.get("/api/private/profile");
             })
             .then(function (response) {
                 store.dispatch(logIn(response.data.name));
