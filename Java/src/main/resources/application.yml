@@ -5,17 +5,8 @@ spring:
 
   data:
     mongodb:
-      host: 192.168.99.100
-      database: fullstackstarter
+      host: localhost
+      database: test
 
 server:
     port: 4000
-# Property overrides specific to an environment
----
-spring:
-  profiles: local
-
-  data:
-    mongodb:
-      host: 192.168.99.100
-      database: fullstackstarter

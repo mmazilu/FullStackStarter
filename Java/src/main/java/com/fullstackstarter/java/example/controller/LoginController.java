@@ -1,19 +1,15 @@
 package com.fullstackstarter.java.example.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import com.fullstackstarter.java.example.repository.User;
+import com.fullstackstarter.java.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.fullstackstarter.java.example.model.UserTO;
-import com.fullstackstarter.java.example.repository.User;
-import com.fullstackstarter.java.example.service.UserService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -32,8 +28,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ResponseEntity<UserTO> signUpUser(@RequestBody UserTO userTO){
-        final UserTO saveUser = userService.saveUser(userTO);
+    public ResponseEntity<User> signUpUser(@RequestBody User userTO){
+        final User saveUser = userService.saveUser(userTO);
         return new ResponseEntity(saveUser, HttpStatus.OK);
     }
 }

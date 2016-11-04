@@ -1,18 +1,17 @@
 package com.fullstackstarter.java.example.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import com.fullstackstarter.java.example.auth.exception.CredentialsInvalidException;
+import com.fullstackstarter.java.example.repository.User;
+import com.fullstackstarter.java.example.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import com.fullstackstarter.java.example.auth.exception.CredentialsInvalidException;
-import com.fullstackstarter.java.example.model.UserTO;
-import com.fullstackstarter.java.example.repository.User;
-import com.fullstackstarter.java.example.repository.UserRepository;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -30,11 +29,6 @@ public class UserService {
         User user = getByUsernameAndPassword(username, password);
 
         if (user != null) {
-//            final UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, AuthorityUtils.createAuthorityList("ROLE_USER"));
-//            token.setDetails(new WebAuthenticationDetails(request));
-//            Authentication authentication = authenticationManager.authenticate(token);
-//            LOG.info("Logging in with [{}]", authentication.getPrincipal());
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
             HttpSession session = request.getSession();
             session.setAttribute("loggedIn", true);
             session.setAttribute("username", username);
@@ -50,27 +44,25 @@ public class UserService {
         session.removeAttribute("username");
     }
 
-    public UserTO getUserByUsername(String username){
-        final User byUsername = userRepository.findByUsername(username);
-        return (byUsername != null) ? UserTO.from(byUsername) : null;
+    public User getUserByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     public User getByUsernameAndPassword(String username, String password){
         return userRepository.findByUsernameAndPassword(username, password);
     }
 
-    public List<UserTO> getUsers(){
-        return userRepository.findAll().stream().map(UserTO::from).collect(Collectors.toList());
+    public List<User> getUsers(){
+        return userRepository.findAll();
     }
 
-    public UserTO saveUser(UserTO userTO){
-        User user = new User();
-        user.setName(userTO.getName());
-        user.setUsername(userTO.getUsername());
-        user.setPassword(userTO.getPassword());
-
+    public User saveUser(User user){
+        user.set_id(null);
         final User savedUser = userRepository.save(user);
+        return savedUser;
+    }
 
-        return UserTO.from(savedUser);
+    public User getUserById(String id) {
+        return userRepository.findBy_id(id);
     }
 }
