@@ -24,6 +24,12 @@ module.exports = {
                 to: './../../NodeJS/public/',
                 flatten: true,
                 force: true
+            },
+            {
+                from: 'dist/*',
+                to: './../../Java/src/main/resources/public/',
+                flatten: true,
+                force: true
             }
         ])//,
 

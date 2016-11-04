@@ -10,6 +10,8 @@ import Header from './../../components/Header/Header.jsx';
 import Login from './../Login/Login.jsx';
 import Signup from './../Login/Signup.jsx';
 import Users from './../Users/Users.jsx';
+import Topics from './../Topics/Topics.jsx';
+import Topic from './../Topics/Topic.jsx';
 
 import {toggleMenu} from './../../redux/actions';
 import store from './../../redux/store';
@@ -54,11 +56,16 @@ class Main extends React.Component {
                         <Link to="/users">
                             <MenuItem onTouchTap={ this.handleToggle }>Users</MenuItem>
                         </Link>
+                        <Link to="/topics">
+                            <MenuItem onTouchTap={ this.handleToggle }>Topics</MenuItem>
+                        </Link>
                     </Drawer>
 
                     <Match pattern="/login" component={Login} />
                     <Match pattern="/signup" component={Signup} />
                     <Match pattern="/users" component={Users} />
+                    <Match pattern="/topics" component={Topics} />
+                    <Match pattern="/topic/:id" component={Topic} />
                 </div>
             </Provider>
         );

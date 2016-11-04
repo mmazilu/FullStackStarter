@@ -14,6 +14,10 @@ var initialState = {
     },
     users:{
         userList:null
+    },
+    topics:{
+        topicList:null,
+        openAdd: false
     }
 };
 
