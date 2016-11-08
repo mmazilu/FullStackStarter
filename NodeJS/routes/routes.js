@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var UserController = require('./userController');
+var BoardController = require('./boardController');
 
 // Authentication and Authorization Middleware
 var auth = function(req, res, next) {
@@ -61,7 +62,7 @@ router.post('/signup', function (req, res) {
                     res.sendStatus(403);
                 } else {
                     var newUser = {
-                        user: req.body.username,
+                        username: req.body.username,
                         password: req.body.password,
                         name: req.body.name
                     };
@@ -80,6 +81,38 @@ router.post('/signup', function (req, res) {
             });
     }
 });
+
+router.post('/private/postmessage', auth, function (req, res) {
+    if (!req.body.message) {
+        res.sendStatus(400);
+    } else {
+        var message = {
+            username: req.session.username,
+            message: req.body.message,
+            board: "main",
+            date: new Date()
+        };
+        BoardController.saveMessage(message)
+            .then(function() {
+                res.sendStatus(200);
+            })
+            .catch(function() {
+                res.sendStatus(500);
+            });
+    }
+});
+
+
+router.get('/private/messages', auth, function(req, res) {
+    BoardController.getMessages(
+        (code)=>{
+            res.sendStatus(status);
+        },
+        (users)=>{
+            res.send(users);
+        });
+});
+
 
 router.get('/private/users', auth, function(req, res) {
     UserController.getUsers(
